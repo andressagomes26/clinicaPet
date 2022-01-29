@@ -100,7 +100,7 @@ class Animal{
         $this->retornoBD=$this->conexaoBD-> query($sql);
     }
     public function selecionarAnimais(){
-        $sql="select * from animal order by nome_animal DESC";
+        $sql="select * from animal order by nome_animal ASC";
         $this->retornoBD=$this->conexaoBD-> query($sql);
     }
 

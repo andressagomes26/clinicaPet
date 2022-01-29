@@ -98,7 +98,7 @@ if (isset($_POST['formCadastrarCliente'])) {
     $objConsulta->setData($_POST['dataConsulta']);
     $objConsulta->setHora($_POST['horaConsulta']);
     $objConsulta->setObservacao($_POST['obsConsulta']);
-    
+    $objConsulta->setID($_POST['idconsulta']);
     $objConsulta->editar();
 
 } 

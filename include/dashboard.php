@@ -1,16 +1,9 @@
 <?php
-//session_start();
-//$_SESSION["administrador"] = 'true';
-
-//include("Login.php");
-session_start();
-
-if (!isset($_SESSION['administrador'])) {
-    header("Location:../index.html");
-}
+include_once("../classes/CalculosDashboard.php");
 ?>
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
 
@@ -20,10 +13,10 @@ if (!isset($_SESSION['administrador'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ClinicaPet- Admin</title>
+    <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -53,76 +46,14 @@ if (!isset($_SESSION['administrador'])) {
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="../include/dashboard.php">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Cliente</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funcionalidades:</h6>
-                        <a class="collapse-item" href="?rota=cadastrar_cliente">Cadastrar</a>
-                        <a class="collapse-item" href="?rota=visualizar_cliente">Visualizar</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
-                    aria-expanded="true" aria-controls="collapse2">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>PET</span>
-                </a>
-                <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funcionalidades:</h6>
-                        <a class="collapse-item" href="?rota=cadastrar_animal">Cadastrar</a>
-                        <a class="collapse-item" href="?rota=visualizar_animal">Visualizar</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
-                    aria-expanded="true" aria-controls="collapse3">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Consultas</span>
-                </a>
-                <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funcionalidades:</h6>
-                        <a class="collapse-item" href="?rota=cadastrar_consulta">Cadastrar</a>
-                        <a class="collapse-item" href="?rota=visualizar_consulta">Visualizar</a>
-                    </div>
-                </div>
-            </li>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-                        
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            <hr class="sidebar-divider d-none d-md-block">
 
         </ul>
         <!-- End of Sidebar -->
@@ -147,14 +78,14 @@ if (!isset($_SESSION['administrador'])) {
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                                </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
                     </form>
-                                
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -306,7 +237,7 @@ if (!isset($_SESSION['administrador'])) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="../img-profile rounded-circle"
+                                <img class="img-profile rounded-circle"
                                     src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -338,25 +269,149 @@ if (!isset($_SESSION['administrador'])) {
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <?php
-                 echo'<span id="mensagem"></span>';
-                     if (isset($_GET['msg'])){
-                        echo'<div class="container">';
-                            echo'<div class="col-lg-12 mb-12">';
-                                echo'<div class="card bg-success text-white shadow">
-                                        <div class="card-body">';                         
-                                            echo'<div class="text-black-50" >' . $_GET['msg'] . '</div>';
-                                            echo"</div>";
-                                echo"</div>";
-                             echo"</div>"; 
-                        echo"</div>"; 
-                    }?>
                 <div class="container-fluid">
 
-                
-                    <?php
-                        include("../include/controlador.php");
-                    ?>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <p>Ir para a página de administrador &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="/PHP_projetoClinicaPet2/produto/admin.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Page Admin </a>
+
+                        </p>
+                        
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Total de consultas realizadas -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total de Consultas Realizadas</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php 
+                                                    $Dashboard = new CalculosDashboard();
+                                                    $Dashboard->totalConsultas();
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Número de Animais cadastrados -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Número de Animais cadastrados </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php 
+                                                    $Dashboard = new CalculosDashboard();
+                                                    $Dashboard->totalAnimais();
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Número de Clientes da Clínica -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                               Número de Clientes da Clínica</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php 
+                                                    $Dashboard = new CalculosDashboard();
+                                                    $Dashboard->totalClientes();
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Quantidade de Gatinhos Cachorrinhos -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Dados Quantitativos do Sistema Administrativo</h6>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="small font-weight-bold">Quantidade de Cachorros cadastrados<span class="float-right">
+                                    <?php 
+                                        $Dashboard = new CalculosDashboard();
+                                        $Dashboard->totalDogs();
+                                    ?>
+                                </span></h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 50%"
+                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <h4 class="small font-weight-bold">Quantidade de Gatos cadastrados<span
+                                    class="float-right">
+                                        <?php 
+                                            $Dashboard = new CalculosDashboard();
+                                            $Dashboard->totalCats();
+                                        ?>
+                                    </span></h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 30%"
+                                    aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Color System -->
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-danger text-white shadow">
+                                <div class="card-body">
+                                    Cachorros
+                                    <div class="text-white-50 small">#e74a3b</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-warning text-white shadow">
+                                <div class="card-body">
+                                    Gatos
+                                    <div class="text-white-50 small">#f6c23e</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -368,7 +423,7 @@ if (!isset($_SESSION['administrador'])) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>
@@ -408,18 +463,23 @@ if (!isset($_SESSION['administrador'])) {
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- funcoes adicioandas -->
-    <!--script src="../js/principal.js"></script!-->
-    <script src="../js/principal2.js"></script>
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
 
 </html>
+

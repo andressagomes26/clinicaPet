@@ -50,12 +50,10 @@ class ConsultaPet{
         return $this->nomeDono =  mb_strtoupper($nomeDono, 'UTF-8');
     }
     public function setData($data){
-        //setlocale(LC_ALL, "pt_BR", "pt_BR.utf-8", "portuguese");
         //return $this->data = date("Y-m-d");
         return $this->data=$data;
     }
     public function setHora($hora){
-        //setlocale(LC_ALL, "pt_BR", "pt_BR.utf-8", "portuguese");
         //return $this->hora = date('H:i:s');
         return $this->hora=$hora;
     }
